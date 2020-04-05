@@ -30,19 +30,19 @@ Wrong: 5 (2, 4, 6, 8, 10)
 其中“:”后面的数字5表示对/错的题目的数量，括号内的是对/错题目的编号。为简单起见，假设输入的题目都是按照顺序编号的符合规范的题目。
 */
 
-/*这个类管理参数 -n -r -e 解析*/
+import static Formulas.ResourceManager.*;
+
 public class ParametersManager {
+/*
+  @program: JDHomeWork_QZ_YF
+ *
+ * @description: 这个类负责参数解析
+ *
+ * @author: feng
+ *
+ * @create: 2020-04-05 10:39
+ */
     public static void main(String[] args) {
 
-        // 下面是调试代码，方便了解ResourceManager这个类
-        ResourceManager r = new ResourceManager();
-        ResourceManager.logAndWrite(r.answersFileName, "asdklasjdlajsld");
-        ResourceManager.logAndWrite(r.answersFileName, "da");
-
-        ResourceManager.logAndWrite(r.exercisesFileName, "asdklasjdlajsld");
-        ResourceManager.logAndWrite(r.exercisesFileName, "da");
-
-        ResourceManager.logAndWrite(r.gradeFileName, "asdklasjdlajsld");
-        ResourceManager.logAndWrite(r.gradeFileName, "da");
     }
 }
