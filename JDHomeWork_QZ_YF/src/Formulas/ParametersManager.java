@@ -43,6 +43,13 @@ public class ParametersManager {
  * @create: 2020-04-05 10:39
  */
     public static void main(String[] args) {
-
+        FormulasGenerator formulas = new FormulasGenerator(4);
+        int i = 0;
+        while(i< 10){
+            if (formulas.generatorTow()){
+                i++;
+            }
+        }
+        formulas.getFormula();
     }
 }

@@ -29,7 +29,7 @@ final class ResourceManager {
 
     // 文件名
     private String fileName;
-    // 文件全路径1
+    // 文件全路径
     private String path;
 
     /**
@@ -52,7 +52,6 @@ final class ResourceManager {
      * @date: 2020/4/5
      */
     void logAndWrite(String str) {
-
         try {
             // 确定输入的字符串格式
             String newStr;
