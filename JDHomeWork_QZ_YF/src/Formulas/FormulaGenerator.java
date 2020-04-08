@@ -32,14 +32,14 @@ public class FormulaGenerator {
                 Formula2 formula2 = formulas2Generator.generator();
                 if (formula2 !=  null){
                     exercisesFile.logAndWrite(formula2.describtion);
-                    exercisesFile.logAndWrite(formula2.result);
+                    answersFile.logAndWrite(formula2.result);
                     i++;
                 }
             }else {
                 Formula3 formula3 = formulas3Generator.generator();
                 if (formula3 != null) {
                     exercisesFile.logAndWrite(formula3.describtion);
-                    exercisesFile.logAndWrite(formula3.result);
+                    answersFile.logAndWrite(formula3.result);
                     i++;
                 }
             }

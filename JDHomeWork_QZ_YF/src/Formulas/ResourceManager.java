@@ -17,12 +17,12 @@ final class ResourceManager {
     /*输出的表达式的文件名*/
     static final String exercisesFileName = "Exercises.txt";
     // 第几条公式，私有静态属性
-    private static int exercisesCount = 1;
+    private int exercisesCount = 1;
 
     /*输出的表达式答案的文件名*/
     static final String answersFileName = "Answers.txt";
     // 第几个答案，私有静态属性
-    private static int answersCount = 1;
+    private int answersCount = 1;
 
     /*输出的调试日志的文件名*/
     static final String gradeFileName = "Grade.txt";
@@ -57,11 +57,11 @@ final class ResourceManager {
             String newStr;
             switch (fileName){
                 case exercisesFileName:
-                    newStr = "四则运算题目" + exercisesCount +" "+ str + "\n";
+                    newStr = "四则运算题目" + exercisesCount +"： "+ str + "\n";
                     exercisesCount += 1;
                     break;
                 case answersFileName:
-                    newStr = "答案" + answersCount + " " + str + "\n";
+                    newStr = "答案" + answersCount + "： " + str + "\n";
                     answersCount += 1;
                     break;
                 case gradeFileName:
