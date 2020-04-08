@@ -10,12 +10,13 @@ public class Formula2 {
      * @author: feng
      * @create: 2020-04-06 23:28
      **/
-    private int num1;
-    private String symbol;
-    private int num2;
     private Random random = new Random();
 
-    public int result;  // 暂时先用int
+    private int num1;
+    public String symbol;
+    private int num2;
+
+    public String result;  // 暂时先用int
     public String describtion;
 
     /**
@@ -26,34 +27,40 @@ public class Formula2 {
      */
     Formula2(int num1, String symbol, int num2, Boolean randomSwap) {
 
-        this.num1 = num1;
-        this.num2 = num2;
-
-        this.symbol = symbol;
         if (randomSwap && random.nextBoolean()) {
             // 用随机数判断是否随机交换两个数
-            describtion = num2 + " " + symbol + " " + num1;
+            this.num2 = num1;
+            this.num1 = num2;
         } else {
-            describtion = num1 + " " + symbol + " " + num2;
+            this.num1 = num1;
+            this.num2 = num2;
         }
+        this.symbol = symbol;
 
+        describtion = num1 + " " + symbol + " " + num2;
         switch (symbol) {
             case "+":
-                result = num1 + num2;
+                result = String.valueOf(num1 + num2);
                 break;
             case "−":
-                result = num1 - num2;
+                result = String.valueOf(num1 - num2);
                 break;
             case "×":
-                result = num1 * num2;
+                result = String.valueOf(num1 * num2);
                 break;
             case "÷":
-                result = num1 / num2;   // 这里到时候化为真分数
+                int cm = MathMethon.conventionMax(num1, num2);  // 求最大公约数
+                int part1 = num1/cm;
+                int part2 = num2/cm;
+                if (part1 == part2 ){
+                    result = "1";
+                }else {
+                    result = part1 + "/" + part2;   // 这里到时候化为真分数
+                }
                 break;
             default:
-                result = -1;    // 结果为-1 代表出错了
+                result = "未识别的运算符号！";    // 结果为-1 代表出错了
         }
-
     }
 
     // 为了拿对象当key

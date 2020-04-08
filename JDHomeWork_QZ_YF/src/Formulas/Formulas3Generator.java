@@ -36,17 +36,22 @@ public class Formulas3Generator {
     Formula3 generator(){
         // 生成两个随机数num1、num2 和符号symbol
         String symbol = RandomSymbol.randomSymbol();
+
         Formula2 formula2 = formulas2Generator.generator();  // 第一个数
         while (formula2 == null){
             formula2 = formulas2Generator.generator();   // 直到生成成功
+        }
+        if (formula2.symbol == "÷"){
+            // 暂时不支持连除
+            return null;
         }
 
         int num;    // 第二个数小于或等于第一个数
         if (symbol == "÷"){
             // 除法除数不为0
-            num = (int) (1 + Math.random()*( formula2.result -1 +1));
+            num = (int) (1 + Math.random()*( MathMethon.translateResult(formula2.result) -1 +1));
         }else{
-            num = random.nextInt(formula2.result + 1);
+            num = random.nextInt(MathMethon.translateResult(formula2.result) + 1);
         }
 
         // 判断是否包含第一个参数
@@ -87,13 +92,14 @@ public class Formulas3Generator {
         }
         //System.out.println("生成成功！"+ num1 + symbol + num2);
         Boolean randomSwap = Boolean.FALSE;
-        if(!Objects.equals(symbol, "-") && !((symbol == "÷") && (formula2.result == 0)) && random.nextBoolean()){
+        if((!Objects.equals(symbol, "-") || !((symbol == "÷") && (num == 0))) && random.nextBoolean()){
             randomSwap = Boolean.TRUE;
         }
-//        Boolean withBrackets = (formula2.)
+        // 二参数的式子如果运算符号优先级小于外部则加括号"+", "−", "×", "÷"
+        Boolean withBrackets = (formula2.symbol == "+" || formula2.symbol == "−") && (symbol == "×" || symbol == "÷");
         // 判断结果是否合法
         Formula3 formula3 = new Formula3(formula2,symbol,num, randomSwap, Boolean.TRUE);
-        if ((formula3.result < 0) || (formula3.result >= scope)){
+        if ((MathMethon.translateResult(formula3.result) < 0) || (MathMethon.translateResult(formula3.result) >= scope)){
             return null;    // 参数超过范围
         }
         return formula3;

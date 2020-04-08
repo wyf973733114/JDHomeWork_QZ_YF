@@ -17,7 +17,7 @@ public class Formula3 {
     private int num;
     private Random random = new Random();
 
-    public int result;  // 暂时先用int
+    public String result;
     public String describtion;
 
     /**
@@ -30,32 +30,39 @@ public class Formula3 {
 
         this.symbol = symbol;
         this.num = num;
-        this.formula = formula;
+        this.formula = formula2;
         Boolean swap = randomSwap && random.nextBoolean();
         String formula2describtion = withBrackets ? "(" + formula2.describtion + ")" : formula2.describtion;
 
         if (swap){
             // 用随机数判断是否随机交换两个数
-            describtion = formula2describtion + " " + symbol + " " + num;
-        }else{
             describtion = num + " " + symbol + " " + formula2describtion;
+        }else{
+            describtion = formula2describtion + " " + symbol + " " + num;
         }
 
         switch (symbol){
             case "+":
-                result = formula2.result + num;
+                result = String.valueOf(MathMethon.translateResult(formula2.result) + num);
                 break;
             case "−":
-                result = swap? (num - formula2.result):(formula2.result - num);
+                result = swap? String.valueOf(num - MathMethon.translateResult(formula2.result)):String.valueOf(MathMethon.translateResult(formula2.result) - num);
                 break;
             case "×":
-                result = formula2.result * num;
+                result = String.valueOf(MathMethon.translateResult(formula2.result) * num);
                 break;
             case "÷":
-                result = swap? (num / formula2.result):(formula2.result / num);   // 这里到时候化为真分数
+                int cm = MathMethon.conventionMax(num, MathMethon.translateResult(formula2.result));  // 求最大公约数
+                int part2 = num/cm;
+                int part1 = MathMethon.translateResult(formula2.result)/cm;
+                if (part1 == part2 ){
+                    result = "1";
+                }else {
+                    result = swap ? part2 + "/" + part1 : part1 + "/" + part2 ;   // 这里到时候化为真分数
+                }
                 break;
             default:
-                result = -1;    // 结果为-1 代表出错了
+                result = "-1";    // 结果为-1 代表出错了
         }
 
     }

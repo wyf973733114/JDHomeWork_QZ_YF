@@ -81,16 +81,16 @@ public class Formulas2Generator {
         }
         //System.out.println("生成成功！"+ num1 + symbol + num2);
         Boolean randomSwap = Boolean.FALSE;
-        if(!Objects.equals(symbol, "-") && !((symbol == "÷") && (num1 == 0)) && random.nextBoolean()){
+        if((!Objects.equals(symbol, "-") || !((symbol == "÷") && (num2 == 0))) && random.nextBoolean()){
             randomSwap = Boolean.TRUE;
         }
-        // 判断结果是否合法
-        Formula2 formula = new Formula2(num1, symbol, num2, randomSwap);
-        if ((formula.result < 0) || (formula.result >= scope)){
+
+        Formula2 formula2 = new Formula2(num1, symbol, num2, randomSwap);
+        if ((MathMethon.translateResult(formula2.result) < 0) || (MathMethon.translateResult(formula2.result) >= scope)){
             return null;    // 参数超过范围
         }
 
-        return formula;
+        return formula2;
     }
 
 }
