@@ -1,5 +1,6 @@
 package Formulas;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class FormulaGenerator {
@@ -21,29 +22,29 @@ public class FormulaGenerator {
      * @author: feng
      * @date: 2020/4/5
      */
-    static void generator(int scope,int count) {
+    static ArrayList<Result> generator(int scope,int count) {
         Formulas2Generator formulas2Generator = new Formulas2Generator(scope);
         Formulas3Generator formulas3Generator = new Formulas3Generator(scope);
-        ResourceManager exercisesFile = new ResourceManager(ResourceManager.exercisesFileName);
-        ResourceManager answersFile = new ResourceManager(ResourceManager.answersFileName);
+        ArrayList<Result> list = new ArrayList<>();
+        
         int i = 0;
         while(i< count){
             if (random.nextBoolean()){  // 随机生成二参数公式或者三参数公式
                 Formula2 formula2 = formulas2Generator.generator();
                 if (formula2 !=  null){
-                    exercisesFile.logAndWrite(formula2.describtion);
-                    answersFile.logAndWrite(formula2.result);
+                	Result item = new Result(formula2.describtion, formula2.result);
+                	list.add(item);
                     i++;
                 }
             }else {
                 Formula3 formula3 = formulas3Generator.generator();
                 if (formula3 != null) {
-                    exercisesFile.logAndWrite(formula3.describtion);
-                    answersFile.logAndWrite(formula3.result);
+                	Result item = new Result(formula3.describtion, formula3.result);
+                	list.add(item);
                     i++;
                 }
             }
         }
-
+        return list;
     }
 }

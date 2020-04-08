@@ -1,6 +1,11 @@
 package Formulas;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Stack;
+
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 final class ResourceManager {
 /*
@@ -17,12 +22,12 @@ final class ResourceManager {
     /*输出的表达式的文件名*/
     static final String exercisesFileName = "Exercises.txt";
     // 第几条公式，私有静态属性
-    private int exercisesCount = 1;
+    private static int exercisesCount = 1;
 
     /*输出的表达式答案的文件名*/
     static final String answersFileName = "Answers.txt";
     // 第几个答案，私有静态属性
-    private int answersCount = 1;
+    private static int answersCount = 1;
 
     /*输出的调试日志的文件名*/
     static final String gradeFileName = "Grade.txt";
@@ -31,9 +36,11 @@ final class ResourceManager {
     private String fileName;
     // 文件全路径
     private String path;
+    
 
     /**
-     * @description:  构造的时候初始化文件夹
+     * @description:   根据文件名，初始化文件地址
+     * @param: [fileName]
      * @author: feng
      * @date: 2020/4/5
      */
@@ -44,10 +51,25 @@ final class ResourceManager {
 
         System.out.println(path);
     }
-
+    
+    /**
+     * @description:  清空文件的内容
+     */
+    void clearFile() {
+        try {
+        	FileOutputStream fos = new FileOutputStream(path,false); //true表示在文件末尾追加
+            fos.write("".getBytes());
+			fos.close();
+		} catch (IOException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+    }
+    
+    
     /**
      * @description:  控制台输出并写入对应的txt文件
-     * @param:  [file, str]
+     * @param:  写入文件的内容
      * @author: feng
      * @date: 2020/4/5
      */
@@ -57,11 +79,11 @@ final class ResourceManager {
             String newStr;
             switch (fileName){
                 case exercisesFileName:
-                    newStr = "四则运算题目" + exercisesCount +"： "+ str + "\n";
+                    newStr = "四则运算题目" + exercisesCount +": "+ str + "\n";
                     exercisesCount += 1;
                     break;
                 case answersFileName:
-                    newStr = "答案" + answersCount + "： " + str + "\n";
+                    newStr = "答案" + answersCount + " " + str + "\n";
                     answersCount += 1;
                     break;
                 case gradeFileName:
@@ -70,7 +92,7 @@ final class ResourceManager {
                 default:
                     throw new IOException();
             }
-
+            
             FileOutputStream fos = new FileOutputStream(path,true); //true表示在文件末尾追加
             fos.write(newStr.getBytes());
             fos.close();
@@ -79,6 +101,97 @@ final class ResourceManager {
         } catch (IOException e) {
             System.out.println(str + "字符串写入失败！请检查文件名！！！");
         }
+    }
+    
+    
+    /**
+     * @description:  将表达式和答案写入文件
+     * @param:  表达式集合
+     */
+    static void writeFormulasToFile(ArrayList<Result> FormulaList) {
+    	ResourceManager r1 = new ResourceManager(exercisesFileName);    // 写入表达式
+    	ResourceManager r2 = new ResourceManager(answersFileName);  // 写入答案  	
+    	
+    	// 清空文件内容
+    	r1.clearFile();
+    	r2.clearFile();
+		
+    	// 将表达式写入文件
+		for(Result item: FormulaList) {
+			r1.logAndWrite(item.describtion);
+			r2.logAndWrite(String.valueOf(item.result));
+		};
+    }
+    
+    
+    /**
+     * @description:  获取文件内容，返回一个数组，元素为每一行的内容
+     * @param:  文件名
+     */
+    static ArrayList<String> getFileContent(String fileName) throws FileNotFoundException {
+    	ArrayList<String> content = new ArrayList<>();
+    	File file = new File(fileName);
+    	BufferedReader reader = null;
+    	
+    	try {
+			reader = new BufferedReader(new FileReader(file));
+			String tempStr = null;
+			while((tempStr = reader.readLine()) != null) {
+				content.add(tempStr);
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return content;
+    }
+    
+    
+    // 检查答案
+    static void checkAnswer() {
+    	try {
+    		// 打开Exercises.txt和answer.txt
+    		ArrayList<String> exercisesContent = getFileContent(exercisesFileName);
+    		ArrayList<String> answersContent = getFileContent(answersFileName);
+    		
+    		// 保存答案正确的题号，保存答案错误的题号
+    		ArrayList<Integer> rightCount = new ArrayList<>();
+    		ArrayList<Integer> errorCount = new ArrayList<>();
+    		// 写入日志
+    		ResourceManager r = new ResourceManager(gradeFileName);
+    		r.clearFile();
+    		
+    		// 处理exercisesContent的内容
+    		
+    		
+    		// 循环对比，对比每一项的答案是否正确
+    		for(int i = 0; i < exercisesContent.size(); i++) {
+    			// 获取数字
+    			String[] temp1 = exercisesContent.get(i).split(" ");
+    			// 获取答案
+    			String[] temp2 = answersContent.get(i).split(" ");
+    			
+    			// TODO:调用运算函数，计算结果
+    			
+    			rightCount.add(2);
+    			errorCount.add(3);
+    			System.out.println(temp1[0]);
+    			
+    		}
+    		
+    		r.logAndWrite("Right:" + rightCount.toString());
+    		r.logAndWrite("Error:" + errorCount.toString());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    
+    public static void main(String[] args) {
+    	
+    	ArrayList<Result> FormulaList = FormulaGenerator.generator(100,10);
+    	writeFormulasToFile(FormulaList);
+    	//checkAnswer();
     }
 }
 

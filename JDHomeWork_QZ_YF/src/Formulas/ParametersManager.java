@@ -41,6 +41,6 @@ public class ParametersManager {
  * @create: 2020-04-05 10:39
  */
     public static void main(String[] args) {
-        FormulaGenerator.generator(100,100);
+        //FormulaGenerator.generator(100,100);
     }
 }
