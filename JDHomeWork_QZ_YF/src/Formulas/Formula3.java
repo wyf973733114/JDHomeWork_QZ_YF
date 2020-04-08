@@ -58,7 +58,13 @@ public class Formula3 {
                 if (part1 == part2 ){
                     result = "1";
                 }else {
-                    result = swap ? part2 + "/" + part1 : part1 + "/" + part2 ;   // 这里到时候化为真分数
+                    if (swap && part1 == 1){
+                        result = String.valueOf(part2);
+                    }else if (!swap && part2 == 1) {
+                        result = String.valueOf(part1);
+                    }else {
+                        result = swap ? part2 + "/" + part1 : part1 + "/" + part2 ;
+                    }
                 }
                 break;
             default:
