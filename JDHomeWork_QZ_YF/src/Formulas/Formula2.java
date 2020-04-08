@@ -26,8 +26,7 @@ public class Formula2 {
      * @date: 2020/4/7
      */
     Formula2(int num1, String symbol, int num2, Boolean randomSwap) {
-        Boolean swap = randomSwap && random.nextBoolean();
-        if (swap) {
+        if (randomSwap && random.nextBoolean()) {
             // 用随机数判断是否随机交换两个数
             this.num2 = num1;
             this.num1 = num2;
@@ -55,12 +54,10 @@ public class Formula2 {
                 if (part1 == part2 ){
                     result = "1";
                 }else {
-                    if (swap && part1 == 1){
-                        result = String.valueOf(part2);
-                    }else if (!swap && part2 == 1) {
+                    if (part2 == 1) {
                         result = String.valueOf(part1);
                     }else {
-                        result = swap ? part2 + "/" + part1 : part1 + "/" + part2 ;
+                        result = part1 + "/" + part2 ;
                     }
                 }
                 break;
