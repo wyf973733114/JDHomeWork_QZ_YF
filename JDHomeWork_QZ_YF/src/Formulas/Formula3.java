@@ -32,7 +32,7 @@ public class Formula3 {
         this.num = num;
         this.formula = formula2;
         Boolean swap = randomSwap && random.nextBoolean();
-        String formula2describtion = withBrackets ? "(" + formula2.describtion + ")" : formula2.describtion;
+        String formula2describtion = withBrackets ? "( " + formula2.describtion + " )" : formula2.describtion;
 
         if (swap){
             // 用随机数判断是否随机交换两个数

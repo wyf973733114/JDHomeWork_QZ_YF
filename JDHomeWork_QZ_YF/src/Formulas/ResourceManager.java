@@ -1,7 +1,9 @@
 package Formulas;
 
+import java.awt.List;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 final class ResourceManager {
 /*
@@ -107,7 +109,7 @@ final class ResourceManager {
      * @description:  将表达式和答案写入文件
      * @param:  表达式集合
      */
-    static void writeFormulasToFile(ArrayList<Result> FormulaList) {
+    void writeFormulasToFile(ArrayList<Result> FormulaList) {
     	ResourceManager r1 = new ResourceManager(exercisesFileName);    // 写入表达式
     	ResourceManager r2 = new ResourceManager(answersFileName);  // 写入答案  	
     	
@@ -160,24 +162,22 @@ final class ResourceManager {
     		ResourceManager r = new ResourceManager(gradeFileName);
     		r.clearFile();
     		
-    		// 处理exercisesContent的内容
-    		
-    		
     		// 循环对比，对比每一项的答案是否正确
     		for(int i = 0; i < exercisesContent.size(); i++) {
     			// 获取数字
-    			String[] temp1 = exercisesContent.get(i).split(" ");
+    			ArrayList temp1 = new ArrayList<String>(Arrays.asList(exercisesContent.get(i).split("\\s+")));
+    			temp1.remove(0);
     			// 获取答案
-    			String[] temp2 = answersContent.get(i).split(" ");
-    			
+    			ArrayList temp2 = new ArrayList<String>(Arrays.asList(answersContent.get(i).split("\\s+")));
+    			temp2.remove(0);
     			// TODO:调用运算函数，计算结果
     			
-    			rightCount.add(2);
-    			errorCount.add(3);
-    			System.out.println(temp1[0]);
-    			
+    			boolean isTrue = BooleanAnswer.booleanAnswer(temp1, temp2);
+    			if(isTrue) 
+    				rightCount.add(i);
+    			else
+    				errorCount.add(i);
     		}
-    		
     		r.logAndWrite("Right:" + rightCount.toString());
     		r.logAndWrite("Error:" + errorCount.toString());
 		} catch (FileNotFoundException e) {
@@ -185,10 +185,8 @@ final class ResourceManager {
 		}
     }
     
-    
     public static void main(String[] args) {
-    	
-    	
+    	checkAnswer();
     }
 }
 

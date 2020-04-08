@@ -45,8 +45,8 @@ public class ParametersManager {
     public static void main(String[] args) {
         //FormulaGenerator.generator(100,100);
     	ResourceManager resourceManager = new ResourceManager();
-    	ArrayList<Result> FormulaList = FormulaGenerator.generator(100,20);
+    	ArrayList<Result> FormulaList = FormulaGenerator.generator(100,5);
     	resourceManager.writeFormulasToFile(FormulaList);
-    	//checkAnswer();
+    	resourceManager.checkAnswer();
     }
 }
