@@ -13,6 +13,7 @@ public class FormulasGenerator {
 
     // 参数范围
     private int scope;
+    
 
     FormulasGenerator(int scope) {
         this.scope = scope;
@@ -22,21 +23,11 @@ public class FormulasGenerator {
     * @author: feng
     * @date: 2020/4/5
     */
-    void generator() {
-        /*// 这里是关于ResourceManager的使用
-            ResourceManager r1 = new ResourceManager(answersFileName);  // 写入答案
-            r1.logAndWrite("asjdka");
-            ResourceManager r2 = new ResourceManager(gradeFileName); // 写入日志
-            r2.logAndWrite("asjdka");
-            ResourceManager r3 = new ResourceManager(exercisesFileName);    // 写入表达式
-            r3.logAndWrite("asjdka");
-            r3.logAndWrite("dadad");
-            ResourceManager r4 = new ResourceManager(exercisesFileName);    // 写入表达式
-            r4.logAndWrite("asjdka");
-         */
+    public void generator() {
+    	
     }
 
-    void addGenerator(){
+    public void addGenerator(){
 
     }
 

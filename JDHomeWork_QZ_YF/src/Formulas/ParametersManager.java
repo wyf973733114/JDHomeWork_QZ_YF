@@ -11,7 +11,7 @@ package Formulas;
 /* 2. 使用 -r 参数控制题目中数值（自然数、真分数和真分数分母）的范围
     将生成10以内（不包括10）的四则运算题目。该参数可以设置为1或其他自然数。该参数必须给定，否则程序报错并给出帮助信息。
 
-#warning -- 这里必看，先理解
+#warning -- 这里必看，先理解ys
     a. 生成的题目中计算过程不能产生负数，也就是说算术表达式中如果存在形如e1− e2的子表达式，那么e1≥ e2。
     b. 生成的题目中如果存在形如e1÷ e2的子表达式，那么其结果应是真分数。
     c. 每道题目中出现的运算符个数不超过3个。
@@ -31,6 +31,7 @@ Wrong: 5 (2, 4, 6, 8, 10)
 */
 
 import static Formulas.ResourceManager.*;
+import java.util.Arrays;
 
 public class ParametersManager {
 /*
@@ -43,6 +44,7 @@ public class ParametersManager {
  * @create: 2020-04-05 10:39
  */
     public static void main(String[] args) {
-
+    	
+    	System.out.println(args.length);
     }
 }
