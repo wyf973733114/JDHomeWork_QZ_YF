@@ -2,10 +2,6 @@ package Formulas;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Stack;
-
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 final class ResourceManager {
 /*
@@ -37,6 +33,9 @@ final class ResourceManager {
     // 文件全路径
     private String path;
     
+    ResourceManager() {
+    	
+    }
 
     /**
      * @description:   根据文件名，初始化文件地址
@@ -189,9 +188,7 @@ final class ResourceManager {
     
     public static void main(String[] args) {
     	
-    	ArrayList<Result> FormulaList = FormulaGenerator.generator(100,10);
-    	writeFormulasToFile(FormulaList);
-    	//checkAnswer();
+    	
     }
 }
 

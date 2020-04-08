@@ -1,6 +1,8 @@
 package Formulas;
 // 需求：https://edu.cnblogs.com/campus/gdgy/se18_12/homework/10563 -- 对需求不清楚的通过网址再详细去看
 
+import java.util.ArrayList;
+
 /*
 写在前面：生成题目的时候要输出一份 Exercises.txt 存储题目，Answers.txt 存储答案；
         使用 -e 校验答案时要输出一份 Grade.txt 存储日志
@@ -42,5 +44,9 @@ public class ParametersManager {
  */
     public static void main(String[] args) {
         //FormulaGenerator.generator(100,100);
+    	ResourceManager resourceManager = new ResourceManager();
+    	ArrayList<Result> FormulaList = FormulaGenerator.generator(100,20);
+    	resourceManager.writeFormulasToFile(FormulaList);
+    	//checkAnswer();
     }
 }
