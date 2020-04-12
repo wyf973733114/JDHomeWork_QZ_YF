@@ -33,20 +33,55 @@ Wrong: 5 (2, 4, 6, 8, 10)
 */
 
 public class ParametersManager {
-/*
-  @program: JDHomeWork_QZ_YF
- *
- * @description: 这个类负责参数解析
- *
- * @author: feng
- *
- * @create: 2020-04-05 10:39
- */
-    public static void main(String[] args) {
-        //FormulaGenerator.generator(100,100);
-    	ResourceManager resourceManager = new ResourceManager();
-    	ArrayList<Result> FormulaList = FormulaGenerator.generator(100,5);
-    	resourceManager.writeFormulasToFile(FormulaList);
-    	resourceManager.checkAnswer();
-    }
+	/*
+	 * @program: JDHomeWork_QZ_YF
+	 *
+	 * @description: 这个类负责参数解析
+	 *
+	 * @author: feng
+	 *
+	 * @create: 2020-04-05 10:39
+	 */
+	public static void main(String[] args) {
+		ResourceManager resourceManager = new ResourceManager();
+
+
+		int count = 10, scope = 100;
+		boolean isCheckAnswer = false;
+		boolean isGenerateExercise = false;
+
+		for (String x : args) {
+			if (x.equals("-c")) {
+				isCheckAnswer = true;
+				ResourceManager.checkAnswer();
+			}
+			if (x.equals("-n") || x.equals("-r")) {
+				isGenerateExercise = true;
+			}
+		}
+
+		if (isGenerateExercise) {
+			for (int i = 0; i < args.length; i++) {
+				// 生成题目个数
+				if (args[i].equals("-n")) {
+					count = Integer.parseInt(args[i + 1]);
+					i++;
+					continue;
+				}
+				// 限定最大值
+				if (args[i].equals("-r")) {
+					scope = Integer.parseInt(args[i + 1]);
+					i++;
+					continue;
+				}
+			}
+			ArrayList<Result> FormulaList = FormulaGenerator.generator(scope, count);
+			resourceManager.writeFormulasToFile(FormulaList);
+			ResourceManager.checkAnswer();
+		}
+
+		if (isCheckAnswer) {
+			ResourceManager.checkAnswer();
+		}
+	}
 }

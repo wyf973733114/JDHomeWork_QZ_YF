@@ -1,6 +1,6 @@
 package Formulas;
 
-import java.awt.List;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -174,12 +174,12 @@ final class ResourceManager {
     			
     			boolean isTrue = BooleanAnswer.booleanAnswer(temp1, temp2);
     			if(isTrue) 
-    				rightCount.add(i);
+    				rightCount.add(i + 1);
     			else
-    				errorCount.add(i);
+    				errorCount.add(i + 1);
     		}
-    		r.logAndWrite("Right:" + rightCount.toString());
-    		r.logAndWrite("Error:" + errorCount.toString());
+    		r.logAndWrite("Correct: " + rightCount.toString());
+    		r.logAndWrite("Wrong: " + errorCount.toString());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
