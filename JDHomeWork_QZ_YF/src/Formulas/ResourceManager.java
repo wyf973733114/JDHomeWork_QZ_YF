@@ -165,10 +165,10 @@ final class ResourceManager {
     		// 循环对比，对比每一项的答案是否正确
     		for(int i = 0; i < exercisesContent.size(); i++) {
     			// 获取数字
-    			ArrayList temp1 = new ArrayList<String>(Arrays.asList(exercisesContent.get(i).split("\\s+")));
+    			ArrayList<String> temp1 = new ArrayList<String>(Arrays.asList(exercisesContent.get(i).split("\\s+")));
     			temp1.remove(0);
     			// 获取答案
-    			ArrayList temp2 = new ArrayList<String>(Arrays.asList(answersContent.get(i).split("\\s+")));
+    			ArrayList<String> temp2 = new ArrayList<String>(Arrays.asList(answersContent.get(i).split("\\s+")));
     			temp2.remove(0);
     			// TODO:调用运算函数，计算结果
     			
@@ -183,10 +183,6 @@ final class ResourceManager {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-    }
-    
-    public static void main(String[] args) {
-    	checkAnswer();
     }
 }
 

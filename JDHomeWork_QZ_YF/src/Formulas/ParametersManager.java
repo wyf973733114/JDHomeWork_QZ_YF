@@ -43,8 +43,9 @@ public class ParametersManager {
 	 * @create: 2020-04-05 10:39
 	 */
 	public static void main(String[] args) {
+		System.out.println("进入程序");
+		
 		ResourceManager resourceManager = new ResourceManager();
-
 
 		int count = 10, scope = 100;
 		boolean isCheckAnswer = false;
@@ -82,6 +83,10 @@ public class ParametersManager {
 
 		if (isCheckAnswer) {
 			ResourceManager.checkAnswer();
+		}
+		
+		if(isCheckAnswer && isGenerateExercise) {
+			System.out.println("暂无此命令或命令输入错误，请重新运行");
 		}
 	}
 }
