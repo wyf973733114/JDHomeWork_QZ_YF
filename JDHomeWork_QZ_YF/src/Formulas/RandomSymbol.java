@@ -16,7 +16,7 @@ public class RandomSymbol {
     // 随机数生成器
     private static Random random = new Random();
     // 运算符集合
-    static String symbolArray[] = {"+", "−", "×", "÷"};
+    static String symbolArray[] = {"+", "-", "×", "÷"};
 
     /**
      * @description:  生成随机符号

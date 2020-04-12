@@ -96,7 +96,7 @@ public class Formulas3Generator {
             randomSwap = Boolean.TRUE;
         }
         // 二参数的式子如果运算符号优先级小于外部则加括号"+", "−", "×", "÷"
-        Boolean withBrackets = (formula2.symbol == "+" || formula2.symbol == "−") && (symbol == "×" || symbol == "÷");
+        Boolean withBrackets = (formula2.symbol == "+" || formula2.symbol == "-") && (symbol == "×" || symbol == "÷");
         // 判断结果是否合法
         Formula3 formula3 = new Formula3(formula2,symbol,num, randomSwap, Boolean.TRUE);
         if ((MathMethon.translateResult(formula3.result) < 0) || (MathMethon.translateResult(formula3.result) >= scope)){

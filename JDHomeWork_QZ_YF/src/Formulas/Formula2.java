@@ -41,7 +41,7 @@ public class Formula2 {
             case "+":
                 result = String.valueOf(num1 + num2);
                 break;
-            case "−":
+            case "-":
                 result = String.valueOf(num1 - num2);
                 break;
             case "×":

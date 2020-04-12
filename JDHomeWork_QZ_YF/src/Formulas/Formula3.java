@@ -45,7 +45,7 @@ public class Formula3 {
             case "+":
                 result = String.valueOf(MathMethon.translateResult(formula2.result) + num);
                 break;
-            case "−":
+            case "-":
                 result = swap? String.valueOf(num - MathMethon.translateResult(formula2.result)):String.valueOf(MathMethon.translateResult(formula2.result) - num);
                 break;
             case "×":
