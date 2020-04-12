@@ -178,8 +178,8 @@ final class ResourceManager {
     			else
     				errorCount.add(i + 1);
     		}
-    		r.logAndWrite("Correct: " + rightCount.toString());
-    		r.logAndWrite("Wrong: " + errorCount.toString());
+    		r.logAndWrite("Correct: " + rightCount.size() + " " + rightCount.toString());
+    		r.logAndWrite("Wrong: " + errorCount.size() + " " + errorCount.toString());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
