@@ -43,7 +43,6 @@ public class ParametersManager {
 	 * @create: 2020-04-05 10:39
 	 */
 	public static void main(String[] args) {
-		
 		ResourceManager resourceManager = new ResourceManager();
 
 		int count = 10, scope = 100;
@@ -51,7 +50,7 @@ public class ParametersManager {
 		boolean isGenerateExercise = false;
 
 		for (String x : args) {
-			if (x.equals("-c")) {
+			if (x.equals("-e")) {
 				isCheckAnswer = true;
 				ResourceManager.checkAnswer();
 			}
