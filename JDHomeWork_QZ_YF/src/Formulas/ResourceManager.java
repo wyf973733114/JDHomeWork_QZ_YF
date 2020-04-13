@@ -1,11 +1,15 @@
 package Formulas;
 
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+<<<<<<< HEAD
 import java.util.Stack;
 
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+=======
+>>>>>>> zuan
 
 final class ResourceManager {
 /*
@@ -34,12 +38,18 @@ final class ResourceManager {
 
     // 文件名
     private String fileName;
-    // 文件全路径1
+    // 文件全路径
     private String path;
     
+<<<<<<< HEAD
     // 生成随机表达式的个数
     private static int n = 20;
     
+=======
+    ResourceManager() {
+    	
+    }
+>>>>>>> zuan
 
     /**
      * @description:   根据文件名，初始化文件地址
@@ -55,7 +65,13 @@ final class ResourceManager {
         System.out.println(path);
     }
     
+<<<<<<< HEAD
     // 清空文件内容
+=======
+    /**
+     * @description:  清空文件的内容
+     */
+>>>>>>> zuan
     void clearFile() {
         try {
         	FileOutputStream fos = new FileOutputStream(path,false); //true表示在文件末尾追加
@@ -67,6 +83,7 @@ final class ResourceManager {
 		}
     }
     
+<<<<<<< HEAD
     // 返回随机生成的结果，示例
     // data = { numsArr: [1,2], operator: "+", answer: 3, exercise: "1 + 2 =", resultStr: "1 + 2 = 3" }
     static MockResult RandomResult() {
@@ -101,6 +118,9 @@ final class ResourceManager {
     	return res;
     }
 
+=======
+    
+>>>>>>> zuan
     /**
      * @description:  控制台输出并写入对应的txt文件
      * @param:  写入文件的内容
@@ -108,7 +128,6 @@ final class ResourceManager {
      * @date: 2020/4/5
      */
     void logAndWrite(String str) {
-
         try {
             // 确定输入的字符串格式
             String newStr;
@@ -139,7 +158,34 @@ final class ResourceManager {
     }
     
     
+<<<<<<< HEAD
     // 获取指定文件的内容
+=======
+    /**
+     * @description:  将表达式和答案写入文件
+     * @param:  表达式集合
+     */
+    void writeFormulasToFile(ArrayList<Result> FormulaList) {
+    	ResourceManager r1 = new ResourceManager(exercisesFileName);    // 写入表达式
+    	ResourceManager r2 = new ResourceManager(answersFileName);  // 写入答案  	
+    	
+    	// 清空文件内容
+    	r1.clearFile();
+    	r2.clearFile();
+		
+    	// 将表达式写入文件
+		for(Result item: FormulaList) {
+			r1.logAndWrite(item.describtion);
+			r2.logAndWrite(String.valueOf(item.result));
+		};
+    }
+    
+    
+    /**
+     * @description:  获取文件内容，返回一个数组，元素为每一行的内容
+     * @param:  文件名
+     */
+>>>>>>> zuan
     static ArrayList<String> getFileContent(String fileName) throws FileNotFoundException {
     	ArrayList<String> content = new ArrayList<>();
     	File file = new File(fileName);
@@ -149,8 +195,11 @@ final class ResourceManager {
 			reader = new BufferedReader(new FileReader(file));
 			String tempStr = null;
 			while((tempStr = reader.readLine()) != null) {
+<<<<<<< HEAD
 				// 显示行号
 //				System.out.println(tempStr);
+=======
+>>>>>>> zuan
 				content.add(tempStr);
 			}
 			reader.close();
@@ -160,6 +209,7 @@ final class ResourceManager {
     	return content;
     }
     
+<<<<<<< HEAD
     // 检查答案
     static void checkAnswer() {
     	try {
@@ -167,15 +217,30 @@ final class ResourceManager {
     		ArrayList<String> exercisesContent = getFileContent(exercisesFileName);
     		
     		// 打开answer.txt
+=======
+    
+    // 检查答案
+    static void checkAnswer() {
+    	try {
+    		// 打开Exercises.txt和answer.txt
+    		ArrayList<String> exercisesContent = getFileContent(exercisesFileName);
+>>>>>>> zuan
     		ArrayList<String> answersContent = getFileContent(answersFileName);
     		
     		// 保存答案正确的题号，保存答案错误的题号
     		ArrayList<Integer> rightCount = new ArrayList<>();
     		ArrayList<Integer> errorCount = new ArrayList<>();
+<<<<<<< HEAD
+=======
+    		// 写入日志
+    		ResourceManager r = new ResourceManager(gradeFileName);
+    		r.clearFile();
+>>>>>>> zuan
     		
     		// 循环对比，对比每一项的答案是否正确
     		for(int i = 0; i < exercisesContent.size(); i++) {
     			// 获取数字
+<<<<<<< HEAD
     			String[] temp1 = exercisesContent.get(i).split(" ");
     			// 获取答案
     			String[] temp2 = answersContent.get(i).split(" ");
@@ -187,10 +252,28 @@ final class ResourceManager {
     			
     		}
     		
+=======
+    			ArrayList<String> temp1 = new ArrayList<String>(Arrays.asList(exercisesContent.get(i).split("\\s+")));
+    			temp1.remove(0);
+    			// 获取答案
+    			ArrayList<String> temp2 = new ArrayList<String>(Arrays.asList(answersContent.get(i).split("\\s+")));
+    			temp2.remove(0);
+    			// TODO:调用运算函数，计算结果
+    			
+    			boolean isTrue = BooleanAnswer.booleanAnswer(temp1, temp2);
+    			if(isTrue) 
+    				rightCount.add(i + 1);
+    			else
+    				errorCount.add(i + 1);
+    		}
+    		r.logAndWrite("Correct: " + rightCount.size() + " " + rightCount.toString());
+    		r.logAndWrite("Wrong: " + errorCount.size() + " " + errorCount.toString());
+>>>>>>> zuan
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
     }
+<<<<<<< HEAD
     
     public static void main(String[] args) {
     	
@@ -219,5 +302,7 @@ final class ResourceManager {
     	
     	checkAnswer();
     }
+=======
+>>>>>>> zuan
 }
 

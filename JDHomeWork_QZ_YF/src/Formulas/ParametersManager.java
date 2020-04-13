@@ -1,6 +1,8 @@
 package Formulas;
 // 需求：https://edu.cnblogs.com/campus/gdgy/se18_12/homework/10563 -- 对需求不清楚的通过网址再详细去看
 
+import java.util.ArrayList;
+
 /*
 写在前面：生成题目的时候要输出一份 Exercises.txt 存储题目，Answers.txt 存储答案；
         使用 -e 校验答案时要输出一份 Grade.txt 存储日志
@@ -30,6 +32,7 @@ Wrong: 5 (2, 4, 6, 8, 10)
 其中“:”后面的数字5表示对/错的题目的数量，括号内的是对/错题目的编号。为简单起见，假设输入的题目都是按照顺序编号的符合规范的题目。
 */
 
+<<<<<<< HEAD
 import static Formulas.ResourceManager.*;
 import java.util.Arrays;
 
@@ -47,4 +50,61 @@ public class ParametersManager {
     	
     	System.out.println(args.length);
     }
+=======
+public class ParametersManager {
+	/*
+	 * @program: JDHomeWork_QZ_YF
+	 *
+	 * @description: 这个类负责参数解析
+	 *
+	 * @author: feng
+	 *
+	 * @create: 2020-04-05 10:39
+	 */
+	public static void main(String[] args) {
+		ResourceManager resourceManager = new ResourceManager();
+
+		int count = 10, scope = 100;
+		boolean isCheckAnswer = false;
+		boolean isGenerateExercise = false;
+
+		for (String x : args) {
+			if (x.equals("-e")) {
+				isCheckAnswer = true;
+				ResourceManager.checkAnswer();
+			}
+			if (x.equals("-n") || x.equals("-r")) {
+				isGenerateExercise = true;
+			}
+		}
+
+		if (isGenerateExercise) {
+			for (int i = 0; i < args.length; i++) {
+				// 生成题目个数
+				if (args[i].equals("-n")) {
+					count = Integer.parseInt(args[i + 1]);
+					i++;
+					continue;
+				}
+				// 限定最大值
+				if (args[i].equals("-r")) {
+					scope = Integer.parseInt(args[i + 1]);
+					i++;
+					continue;
+				}
+			}
+			ArrayList<Result> FormulaList = FormulaGenerator.generator(scope, count);
+			resourceManager.writeFormulasToFile(FormulaList);
+			ResourceManager.checkAnswer();
+		}
+
+		if (isCheckAnswer) {
+			ResourceManager.checkAnswer();
+		}
+		
+		if(!isCheckAnswer && !isGenerateExercise) {
+			System.out.println("暂无此命令或命令输入错误，请重新运行");
+		}
+	}
+>>>>>>> zuan
 }
